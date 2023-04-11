@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^autores/ autores/controller.php
