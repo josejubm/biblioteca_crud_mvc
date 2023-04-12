@@ -22,14 +22,14 @@ $diccionario = array(
 
 function get_main_template($value = 'header or footer file')
 {
-    $file = '../assets/html/main_' . $value . '.html';
+    $file = '../frontend/html/main_' . $value . '.html';
     $main_template = file_get_contents($file);
     return $main_template;
 }
 
 function get_vista_html($form = 'get')
 {
-    $file = '../assets/html/autores/autor_' . $form . '.html';
+    $file = '../frontend/html/autores/autor_' . $form . '.html';
     $template = file_get_contents($file);
     return $template;
 }
@@ -91,8 +91,8 @@ function retornar_vista($vista, $data = array())
             $fila .= '<td>' . $registro['Nombre'] . '</td>';
             $fila .= '<td>' . $registro['Paterno'] . '</td>';
             $fila .= '<td>' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
-            $fila .= '<td>' . '<a href="#" onclick="editarAutor(' . $registro['Id'] . ')">Editar</a>' . '</td>';
-            $fila .= '<td>' . '<button name="EliminarAutor" type="submit" value="' . $registro['Id'] . '">Eliminar</button>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarAutor(' . $registro['Id'] . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
+            $fila .= '<td>' . '<button class="boton boton-outline-danger" name="EliminarAutor" type="submit" value="' . $registro['Id'] . '"><i class="bx bx-trash"></i>Eliminar</button>' . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }

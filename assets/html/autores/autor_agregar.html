@@ -12,7 +12,7 @@
     
     <div class="containerr">
 
-        <div class="caja_u" style="width: 500px;">
+        <div class="caja_u">
             <div class="form_Autores">
 
                 <form id="alta_autor" action="{SET}" method="POST">
@@ -27,18 +27,19 @@
                     <label for="materno">Apellido Materno:</label>
                     <input type="text" id="materno" name="materno" value="">
 
-                    <button type="submit" id="btnGuardar"> Guardar en base de datos </button>
+                    <button type="submit" id="btnGuardar" class="boton boton-outline-success"><i class='bx bx-save'></i>BTN GUARDAR</button>
+
 
                 </form>
             </div>
         </div>
 
-        <div class="caja_u" style="width: 700px;">
+        <div class="caja_u">
             <div class="table_user">
                 <h2>tabla de AUTORES </h2>
 
                 <form action="{DELETE}" method="POST">
-                    <table id="">
+                    <table id="tabla">
                         <thead>
                             <tr>
                                 <th>N_lista</th>
@@ -52,6 +53,7 @@
                         {TBODY}
 
                     </table>
+                 
                 </form>
             </div>
         </div>

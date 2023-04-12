@@ -210,10 +210,11 @@ main {
     justify-content: space-between;
     flex-wrap: wrap;
     background-color: cornflowerblue;
-}
-
-.containerr>.caja_u {
-    width: 49%;
+  }
+  
+  .containerr > .caja_u:first-child {
+    flex-basis: 30%;
+    max-width: 30%;
     background-color: #f5f5f5;
     border-radius: 0.5rem;
     display: flex;
@@ -222,79 +223,12 @@ main {
     gap: 1rem;
     min-height: 70vh;
     margin: 0 1rem 2rem 0;
-}
-
-/* FORMULARIO LIBROS */
-
-.form_libros>form {
-    background-color: #fff;
-    max-width: 800px;
-    margin: 15px auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.form_libros .titulo_libro {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.form_libros .autor_group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.colum_group
-{
-    padding-left: 1rem;
-}
-
-
-.form_libros .autor_group .colum_group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-input[type="submit"]:hover {
-    background-color: #3e8e41;
-}
-
-
-
-.containerr>.caja {
-    width: 21rem;
+  }
+  
+  .containerr > .caja_u:last-child {
+    flex-basis: 70%;
+    flex-grow: 1;
+    max-width: 70%;
     background-color: #f5f5f5;
     border-radius: 0.5rem;
     display: flex;
@@ -302,37 +236,9 @@ input[type="submit"]:hover {
     padding: 0.5rem 1rem;
     gap: 1rem;
     min-height: 70vh;
-    margin: 0 1rem 2rem 0;
-}
-
-.caja>table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    text-align: center;
-}
-
-th,
-td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-caption {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+    margin: 0 0 2rem 1rem;
+  }
+  
 
 /* FIN CONTENIDO */
 
@@ -469,4 +375,6 @@ caption {
     font-size: 20px;
     margin-right: 10px;
   }
+
+  
   

@@ -75,7 +75,6 @@ function handler()
             /* header("Location: /dwp_2023_pf_bmanuel/autores/mostrar/"); */
             break;
         case EDIT_AUTOR:
-            print "entro al case editar";
             if (!empty($_POST) && $_POST['nombre'] != '') {
                 $result_edited = $autor->edit($_POST);
                 $autores = $autor->get();
