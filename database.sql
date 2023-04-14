@@ -19,7 +19,7 @@ CREATE TABLE `usuarios`
 
 CREATE TABLE `editoriales` 
 (
-  `Id`      INT(2) NOT NULL,
+  `Id`      INT(2) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`)
 )ENGINE = InnoDB;

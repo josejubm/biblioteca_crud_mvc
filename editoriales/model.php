@@ -60,26 +60,24 @@ class EditorialModel extends DBAbstractModel
 
     public function edit($data_new = array())
     {
-        $id = $data_new['id_old'];
-        $nombre =  $data_new['nombre'];
-        $paterno = $data_new['paterno'];
-        $materno = $data_new['materno'];
-            
+        $id_old = $data_new['id_old'];
+        $nombre = $data_new['nombre'];
+
          // Comprobar si los datos del autor existen
-         $this->query = "SELECT Id, Nombre, Paterno, Materno FROM autores WHERE Id ='$id'";
+         $this->query = "SELECT * FROM editoriales WHERE Id ='$id_old'";
          $this->get_results_from_query();
          $data  = $this->rows;
          if (count($this->rows) > 0) {
-            $this->query = "UPDATE autores SET Nombre='$nombre', Paterno='$paterno' , Materno='$materno'WHERE id=$id";
+            $this->query = "UPDATE editoriales SET Nombre='$nombre' WHERE Id=$id_old";
             $this->execute_single_query();
  
-             $mensaje = $this->mensaje = "SE MODIFICO EL AUTOR: " . $data[0]['Nombre'] . " " . $data[0]['Paterno'] ." " . $data[0]['Materno'] . "";
+             $mensaje = $this->mensaje = "SE MODIFICO LA EDITORIAL: " . $data[0]['Nombre'] . "";
              return array(
                  'tipo' => "success",
                  'menss' => $mensaje
              );
          } else {
-             $mensaje = "NO SE PUDO MODIFICAR AL AUTOR";
+             $mensaje = "NO SE PUDO MODIFICAR LA EDITORIAL";
              return array(
                  'tipo' => "error",
                  'menss' => $mensaje
@@ -91,21 +89,21 @@ class EditorialModel extends DBAbstractModel
     public function delete($id = '')
     {
         // Comprobar si los datos del autor existen
-        $this->query = "SELECT Id, Nombre, Paterno, Materno FROM autores WHERE Id ='$id'";
+        $this->query = "SELECT * FROM editoriales WHERE Id ='$id'";
         $this->get_results_from_query();
         $data  = $this->rows;
 
         if (count($this->rows) > 0) {
-            $this->query = "DELETE FROM autores WHERE id=$id";
+            $this->query = "DELETE FROM editoriales WHERE id=$id";
             $this->execute_single_query();
 
-            $mensaje = $this->mensaje = "SE ELIMINO EL AUTOR: " . $data[0]['Nombre'] . " " . $data[0]['Paterno'] ." " . $data[0]['Materno'] . "";
+            $mensaje = $this->mensaje = "SE ELIMINO La EDITORIAL: " . $data[0]['Nombre'] . "";
             return array(
                 'tipo' => "success",
                 'menss' => $mensaje
             );
         } else {
-            $mensaje = "NO EXISTE EL AUTOR";
+            $mensaje = "NO EXISTE LA EDITORIAL";
             return array(
                 'tipo' => "error",
                 'menss' => $mensaje

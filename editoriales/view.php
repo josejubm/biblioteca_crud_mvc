@@ -90,8 +90,8 @@ function retornar_vista($vista, $data = array())
             $fila .= '<td>' . $contador_lista++ . '</td>';
             $fila .= '<td>' . $registro['Id'] . '</td>';
             $fila .= '<td>' . $registro['Nombre'] . '</td>';
-            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarAutor(' . $registro['Id'] . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
-            $fila .= '<td>' . '<button class="boton boton-outline-danger" name="EliminarAutor" type="submit" value="' . $registro['Id'] . '"><i class="bx bx-trash"></i>Eliminar</button>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarEditorial(' . $registro['Id'] . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
+            $fila .= '<td>' . '<button class="boton boton-outline-danger" name="EliminarEditorial" type="submit" value="' . $registro['Id'] . '"><i class="bx bx-trash"></i>Eliminar</button>' . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }
