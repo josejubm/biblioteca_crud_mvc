@@ -96,6 +96,7 @@ function retornar_vista($vista, $data = array())
             $tabla_body .= $fila . '</tr>';
         }
     }
+    print $contador_lista-1;
     $tabla_body .= '</tbody>';
 
 
@@ -104,6 +105,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{contenido}', get_vista_html($vista), $html);
     $html = str_replace('{TBODY}', $tabla_body, $html);
     $html = str_replace('{ALERT}', $alert, $html);
+    $html = str_replace('{total_autor}', $contador_lista, $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

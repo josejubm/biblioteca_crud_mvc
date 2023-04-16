@@ -250,10 +250,44 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
 }
+select {
+  display: block;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
 
 input[type="submit"]:hover {
     background-color: #3e8e41;
 }
+/* cuado agrego un autor con js */
+.label_autor_add
+{
+  display: inline-block;
+  border: 2px solid #07c81a;
+  padding: 5px;
+  background-color: #ffffff;
+  color: #151a1a; 
+}
+
+select
+{
+  background-color: #ffffff; 
+}
+
+.select_editorial
+{
+  border: 2px solid #07c81a;
+}
+
 /* fin FORMULARIO LIBROS */
 
   /* TABLA PAGINADO */
@@ -300,6 +334,8 @@ input[type="submit"]:hover {
     color: white;
     margin-bottom: 15px;
     position: relative;
+
+    margin: 0px 30px 5px 30px;
   }
   
   .success {
@@ -331,6 +367,41 @@ input[type="submit"]:hover {
     font-size: 20px;
     margin-right: 10px;
   }
+
+
+  /* ESTILOS DE LA PAGINACION */
+  .pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 15px;
+  }
+  
+  .pagination-item {
+    margin: 0 5px;
+  }
+  
+  .pagination-item a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #7ad6e6;
+  }
+  
+  .pagination-item.active a {
+    font-weight: bold;
+    background-color: #ccc;
+  }
+
+  .pagination-item a:hover{
+    background-color: #419a09;
+  }
+  
+  
 
   
   
