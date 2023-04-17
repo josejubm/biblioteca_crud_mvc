@@ -61,13 +61,12 @@ function handler()
             }
             break;
         case GET_LIBRO:
-            print "entro al get";
             $libros = $libro->get();
             retornar_vista(VIEW_SET_LIBRO, $libros);
             break;
         case DELETE_LIBRO:
             if (!empty($_POST)) {
-                $result_delete = $libro->delete($_POST['EliminarLibro']);
+                $result_delete = $libro->delete($_POST['id_delete']);
                 $libros = $libro->get();
                 $libros['mensaje'] = $result_delete;
                 // Verificar si hay un mensaje de eliminación
@@ -76,7 +75,7 @@ function handler()
                     echo $libros['mensaje'];
                     // Eliminar el registro correspondiente del array de registros
                     foreach ($libros['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['EliminarLibro']) {
+                        if ($registro['Id'] == $_POST['id_delete']) {
                             unset($libros['registros'][$key]);
                             break;
                         }
@@ -111,8 +110,6 @@ function handler()
             }
             break;
         default:
-
-            print "defaulta case ";
             $autores = $libro->get();
             retornar_vista($event, $autores);
     }

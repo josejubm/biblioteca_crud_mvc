@@ -95,7 +95,8 @@ $comilla = "'";
             $fila .= '<td>' . $registro['AUTOR'] . '</td>';
             $fila .= '<td>' . $registro['EDITORIAL'] . '</td>';
             $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarLibro(' . $comilla. $registro['ISBN'].$comilla . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
-            $fila .= '<td>' . '<button class="boton boton-outline-danger" name="EliminarLibro" type="submit" value="' . $registro['ISBN'] . '"><i class="bx bx-trash"></i>Eliminar</button>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla.$registro['ISBN'] .$comilla. ','.$comilla. $registro['TITULO'] . $comilla.')"><i class="bx bx-trash"></i>Eliminar</a>' 
+            . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }

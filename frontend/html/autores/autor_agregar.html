@@ -1,54 +1,5 @@
 <div class="home-content">
-    <div>
     {ALERT}
-    </div>
-    <div class="overview-boxes">
-        <div class="box">
-            <div class="right-side">
-                <div class="box-topic">Total DE AUTORES </div>
-                <div class="number">{total_autor}</div>
-                <div class="indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span class="text">Up from yesterday</span>
-                </div>
-            </div>
-            <i class='bx bx-cart-alt cart'></i>
-        </div>
-        <div class="box">
-            <div class="right-side">
-                <div class="box-topic">Total Sales</div>
-                <div class="number">58,876</div>
-                <div class="indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span class="text">Up from yesterday</span>
-                </div>
-            </div>
-            <i class='bx bxs-cart-add cart two'></i>
-        </div>
-        <div class="box">
-            <div class="right-side">
-                <div class="box-topic">Total Profit</div>
-                <div class="number">$242,876</div>
-                <div class="indicator">
-                    <i class='bx bx-up-arrow-alt'></i>
-                    <span class="text">Up from yesterday</span>
-                </div>
-            </div>
-            <i class='bx bx-cart cart three'></i>
-        </div>
-        <div class="box">
-            <div class="right-side">
-                <div class="box-topic">Total Return</div>
-                <div class="number">21,086</div>
-                <div class="indicator">
-                    <i class='bx bx-down-arrow-alt down'></i>
-                    <span class="text">Down From Today</span>
-                </div>
-            </div>
-            <i class='bx bxs-cart-download cart four'></i>
-        </div>
-    </div>
-
     <div class="sales-boxes">
 
         <div class="recent-sales box">
@@ -64,19 +15,23 @@
                 <label for="materno">Apellido Materno:</label>
                 <input type="text" id="materno" name="materno" value="">
 
-                <button type="submit" id="btnGuardar" class="boton boton-outline-success"><i class='bx bx-save'></i>BTN
-                    GUARDAR</button>
-
+                <button type="submit" id="btnGuardar" class="boton boton-outline-success">
+                    <i class='bx bx-up-arrow-alt'></i>
+                    GUARDAR
+                </button>
+                <button type="submit" id="btnModificar" class="boton boton-outline-warning" style="display: none;">
+                    <i class='bx bx-save'></i>
+                    ACTUALIZAR
+                </button>
+                <input type="reset" value="Cancelar" id="btnCancelar" onclick="cancelarUpdateAutor()" style="display: none;" class="boton boton-outline-danger">
+                
             </form>
-
         </div>
 
         <div class="top-sales box">
-
             <h2>tabla de AUTORES </h2>
-
             <form action="{DELETE}" method="POST">
-                <table id="tabla">
+                <table id="table">
                     <thead>
                         <tr>
                             <th>N_lista</th>
@@ -88,12 +43,13 @@
                         </tr>
                     </thead>
                     {TBODY}
-
                 </table>
-
             </form>
-
+            <div id="pagination-container">
+                <ul id="pagination">
+                </ul>
+            </div>
         </div>
-
     </div>
 </div>
+

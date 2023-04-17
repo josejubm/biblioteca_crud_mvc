@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8"> 
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="../../frontend/css/estructura.css">
   <link rel="stylesheet" href="../../frontend/css/myStyles.css">
@@ -25,7 +25,7 @@
           <span class="links_name">Dashboard</span>
         </a>
       </li>
-            <li>
+      <li>
         <a href="/dwp_2023_pf_bmanuel/prestamos/mostrar/">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">PRETAMOS</span>
@@ -38,7 +38,7 @@
         </a>
       </li>
       <li>
-        <a href="/dwp_2023_pf_bmanuel/editoriales/mostrar/">
+        <a href="/dwp_2023_pf_bmanuel/editoriales/set/">
           <i class='bx bx-pie-chart-alt-2'></i>
           <span class="links_name">EDITORIALES</span>
         </a>
@@ -55,12 +55,12 @@
           <span class="links_name">USUARIOS</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="#">
           <i class='bx bx-cog'></i>
           <span class="links_name">Setting</span>
         </a>
-      </li>
+      </li> -->
       <li class="log_out">
         <a href="#">
           <i class='bx bx-log-out'></i>
@@ -74,10 +74,10 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">BIBLIOTECA</span>
       </div>
       <div class="search-box">
-        <input type="text" placeholder="Buscar en Tabla {TABLA_NAME}" onkeyup="buscar()" id="tfBuscar">
+        <input type="text" placeholder="Buscar en Tabla {TABLA_NAME}" onkeyup="buscarEnTabla()" id="tfBuscar">
         <i class='bx bx-search'></i>
       </div>
       <div class="profile-details">
@@ -91,10 +91,28 @@
 
   </section>
 
+  <div id="modal" class="modal">
+    <div class="modal-fondo"></div>
+    <div class="modal-contenido">
+      <form action="{DELETE}" method="post" id="modal_form">
+        <div class="modal-header">
+          <h3 class="modal-titulo">Estas a Punto de Eliminar un Registro de la Tabla {TABLA_NAME}</h3>
+          <a class="modal-cerrar" onclick="ocultarModal()">&times;</a>
+        </div>
+        <div class="modal-cuerpo">
+          <p>ELIMINAR {TABLA_NAME} :  <span id="id_a_eliminar" style="color: green; font-size: 1.5em;"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="boton boton-outline-danger"><i class="bx bx-trash"></i>Eliminar</button>
+          <a style="margin-left: 50px;" href="#" class="boton boton-outline-secondary" onclick="ocultarModal()"><i class="bx bx-x"></i>
+           CANCELAR</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="../../frontend/js/script.js"></script>
   <script src="../../frontend/js/copyToForm.js"></script>
-  <script src="../../frontend/js/peticionAjax.js"></script>
 </body>
 
 </html>

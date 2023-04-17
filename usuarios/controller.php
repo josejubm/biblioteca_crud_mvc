@@ -29,7 +29,6 @@ function handler()
     switch ($event) {
         case SET_USUARIO:
             if (!empty($_POST)) {
-                print_r($_POST);
                 $result = $usuario->set($_POST);
                 $usuarios = $usuario->get();
                 $usuarios['mensaje'] = $result;
@@ -41,13 +40,12 @@ function handler()
             }
             break;
         case GET_USUARIO:
-            echo "entro al case grt de usuarios";
             $usuarios = $usuario->get();
             retornar_vista(VIEW_SET_USUARIO, $usuarios);
             break;
         case DELETE_USUARIO:
             if (!empty($_POST)) {
-                $result_delete = $usuario->delete($_POST['EliminarUsuario']);
+                $result_delete = $usuario->delete($_POST['id_delete']);
                 $usuarios = $usuario->get();
                 $usuarios['mensaje'] = $result_delete;
                 // Verificar si hay un mensaje de eliminación
@@ -56,7 +54,7 @@ function handler()
                     echo $usuarios['mensaje'];
                     // Eliminar el registro correspondiente del array de registros
                     foreach ($usuarios['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['EliminarUsuario']) {
+                        if ($registro['Id'] == $_POST['id_delete']) {
                             unset($usuarios['registros'][$key]);
                             break;
                         }
@@ -84,9 +82,7 @@ function handler()
             }
             break;
         default:
-
-            print "defaulta case ";
-            $usuarios = $usuario->get();
+            $usuarios = $usuario->get_Two();
             retornar_vista($event, $usuarios);
     }
 }

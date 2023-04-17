@@ -1,6 +1,6 @@
 RewriteEngine on
 RewriteRule ^autores/ autores/controller.php
 RewriteRule ^editoriales/ editoriales/controller.php
-RewriteRule ^usuarios/ usuarios/controller.php
-RewriteRule ^libros/ libros/controller.php
 
+RewriteRule ^libros/ libros/controller.php
+RewriteRule ^usuarios/ usuarios/controller.php

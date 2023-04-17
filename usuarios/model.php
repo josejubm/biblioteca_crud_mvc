@@ -140,4 +140,34 @@ class UsuarioModel extends DBAbstractModel
             );
         }
     }
+
+    public function get_Two()
+    {
+        $this->query = "SELECT * FROM usuarios";
+        $this->get_results_from_query();
+
+        if (!$this->rows) {
+            return [
+                'mensaje' => 'No se encontraron usuarios',
+                'registros' => []
+            ];
+        }
+        $resultados = array_map(function ($row) {
+            return [
+                'Id' => $row['ClaveUsu'],
+                'Nombre' => $row['Nombre'],
+                'Paterno' => $row['Paterno'],
+                'Materno' => $row['Materno'],
+                'Colonia' => $row['Colonia'],
+                'Calle' => $row['Calle'],
+                'Numero' => $row['Numero'],
+                'Telefono' => $row['Telefono']
+            ];
+        }, $this->rows);
+
+        return [
+            'mensaje' => 'USUARIOS encontrados',
+            'registros' => $resultados
+        ];
+    }
 }

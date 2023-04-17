@@ -81,6 +81,7 @@ function retornar_vista($vista, $data = array())
  ########### fin mensaje de alerta ########
     
     #######tabla contenido###
+    $comilla = "'";
     $tabla_body = '<tbody>';
     $contador_lista = 1;
     foreach ($data['registros'] as $registro) {
@@ -91,12 +92,12 @@ function retornar_vista($vista, $data = array())
             $fila .= '<td>' . $registro['Nombre'] . '</td>';
             $fila .= '<td>' . $registro['Paterno'] . '</td>';
             $fila .= '<td>' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
-            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarAutor(' . $registro['Id'] . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
-            $fila .= '<td>' . '<button class="boton boton-outline-danger" name="EliminarAutor" type="submit" value="' . $registro['Id'] . '"><i class="bx bx-trash"></i>Eliminar</button>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarAutor(' .$comilla. $registro['Id'] .$comilla. ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla.$registro['Id'] .$comilla. ','.$comilla. $registro['Nombre'] .' '.$registro['Paterno'] .$comilla. ')"><i class="bx bx-trash"></i>Eliminar</a>' 
+            . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }
-    print $contador_lista-1;
     $tabla_body .= '</tbody>';
 
 
@@ -106,6 +107,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{TBODY}', $tabla_body, $html);
     $html = str_replace('{ALERT}', $alert, $html);
     $html = str_replace('{total_autor}', $contador_lista, $html);
+    $html = str_replace('{TABLA_NAME}', 'AUTORE', $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

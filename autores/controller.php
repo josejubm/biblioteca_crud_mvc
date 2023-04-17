@@ -51,7 +51,7 @@ function handler()
             break;
         case DELETE_AUTOR:
             if (!empty($_POST)) {
-                $result_delete = $autor->delete($_POST['EliminarAutor']);
+                $result_delete = $autor->delete($_POST['id_delete']);
                 $autores = $autor->get();
                 $autores['mensaje'] = $result_delete;
                 // Verificar si hay un mensaje de eliminación
@@ -60,7 +60,7 @@ function handler()
                     echo $autores['mensaje'];
                     // Eliminar el registro correspondiente del array de registros
                     foreach ($autores['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['EliminarAutor']) {
+                        if ($registro['Id'] == $_POST['id_delete']) {
                             unset($autores['registros'][$key]);
                             break;
                         }
@@ -88,8 +88,6 @@ function handler()
             }
             break;
         default:
-
-            print "defaulta case ";
             $autores = $autor->get();
             retornar_vista($event, $autores);
     }

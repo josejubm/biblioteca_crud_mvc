@@ -144,7 +144,7 @@ function cancelarUsuario(){
     document.getElementById("numero").innerHTML = '';
     document.getElementById("telefono").innerHTML = '';
 
-    document.getElementById("alta_usuario").action = "/dwp_2023_pf_bmanuel/usuarios/set/"
+    document.getElementById("alta_autor").action = "/dwp_2023_pf_bmanuel/usuarios/set/"
 
     document.getElementById("btnGuardar").style.display = "inline-block";
     document.getElementById("btnCancelar").style.display = "none";
@@ -156,6 +156,8 @@ function cancelarUsuario(){
 
 function editarEditorial(id) {
     var celdas = document.getElementById(id).getElementsByTagName("td");
+
+
     // Verificar si el input haiden ya ha sido agregado
     var haidenInput = document.getElementById("id_old");
     if (!haidenInput) {
@@ -171,23 +173,9 @@ function editarEditorial(id) {
 
     document.getElementById("alta_editorial").action = "/dwp_2023_pf_bmanuel/editoriales/edit/"
 
-    document.getElementById("btnGuardar").style.display = "none";
-    document.getElementById("btnCancelar").style.display = "inline-block";
-    document.getElementById("btnModificar").style.display = "inline-block";
-
+    document.getElementById("btGuardar").style.display = "none";
+    document.getElementById("btModificar").style.display = "inline-block";
 }
-
-function cancelarEditorial(){
-    
-    document.getElementById("nombre").innerHTML = '';
-
-    document.getElementById("alta_editorial").action = "/dwp_2023_pf_bmanuel/editoriales/set/"
-
-    document.getElementById("btnGuardar").style.display = "inline-block";
-    document.getElementById("btnCancelar").style.display = "none";
-    document.getElementById("btnModificar").style.display = "none";
-}
-
 
 
 /* COPIAR DE TABLA A FORMULARIO DE REGISTRO DE LIBROS  */
@@ -328,11 +316,10 @@ function mostrarModal(valor, nombre) {
     document.getElementById("modal").style.display = "block";
     document.getElementById("id_a_eliminar").textContent = nombre;
 
-
     const form = document.getElementById('modal_form');
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
-    input.setAttribute('name', 'id_delete');
+    input.setAttribute('name', 'id');
     input.setAttribute('value', valor);
     form.appendChild(input);
 

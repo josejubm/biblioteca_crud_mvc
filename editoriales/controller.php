@@ -28,7 +28,6 @@ function handler()
 
     switch ($event) {
       case SET_EDITORIAL:
-        print "entro al set";
             if (!empty($_POST) && $_POST['nombre'] != '') {
              $result = $editorial->set($_POST);
             
@@ -47,7 +46,7 @@ function handler()
             break;
         case DELETE_EDITORIAL:
             if (!empty($_POST)) {
-                $result_delete = $editorial->delete($_POST['EliminarEditorial']);
+                $result_delete = $editorial->delete($_POST['id_delete']);
                 $editoriales = $editorial->get();
 
                 $editoriales['mensaje'] = $result_delete;
@@ -58,7 +57,7 @@ function handler()
                     echo $editoriales['mensaje'];
                     // Eliminar el registro correspondiente del array de registros
                     foreach ($editoriales['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['EliminarAutor']) {
+                        if ($registro['Id'] == $_POST['id_delete']) {
                             unset($editoriales['registros'][$key]);
                             break;
                         }
@@ -73,7 +72,6 @@ function handler()
             /* header("Location: /dwp_2023_pf_bmanuel/autores/mostrar/"); */
            break;
        case EDIT_EDITORIAL:
-        print_r($_POST);
             if (!empty($_POST) && $_POST['nombre'] != '') {
                 $result_edited = $editorial->edit($_POST);
                 $editoriales = $editorial->get();
@@ -87,8 +85,6 @@ function handler()
             }
             break;
         default:
-
-            print "defaulta case editorial";
             $editoriales = $editorial->get();
             print_r($editoriales);
             retornar_vista($event, $editoriales);
