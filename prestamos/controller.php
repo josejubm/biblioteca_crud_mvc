@@ -1,5 +1,4 @@
 <?php
-
 require_once('constants.php');
 require_once('model.php');
 require_once('view.php');
@@ -9,11 +8,11 @@ require_once('../autores/model.php');
 
 function handler()
 {
-        // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
+    /*     // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
     if (empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === MODULO) {
-        header("Location: /dwp_2023_pf_bmanuel/libros/set/");
+        header("Location: " . MODULO . VIEW_GET_LIBRO . "/");
         exit();
-    }
+    } */
 
     $event = VIEW_GET_LIBRO;
     $uri = $_SERVER['REQUEST_URI'];
@@ -34,19 +33,29 @@ function handler()
     switch ($event) {
         case SET_LIBRO:
             if (!empty($_POST)) {
+
+                print_r($_POST);
                $result_set = $libro->set($_POST);
+
+               print_r($result_set);
+
                 $autor = new AutorModel();
                 $autores = $autor->get();
+
                 $editorial = new EditorialModel;
                 $editoriales = $editorial->get();
+
                 $libros = $libro->get();
                 $libros['mensaje'] = $result_set;
                 retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
             } else {
+
                 $autor = new AutorModel();
                 $autores = $autor->get();
+
                 $editorial = new EditorialModel;
                 $editoriales = $editorial->get();
+
                 $libros = $libro->get();
                 retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
             }
@@ -88,27 +97,16 @@ function handler()
             }
             break;
         case EDIT_LIBRO:
-            if (!empty($_POST) ) {
-
-                $autor = new AutorModel();
+            if (!empty($_POST) && $_POST['nombre'] != '') {
+                $result_edited = $autor->edit($_POST);
                 $autores = $autor->get();
-
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-
-                $result_edited = $libro->edit($_POST);
-
-                $libros = $libro->get();
-                $libros['mensaje'] = $result_edited;
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
-               
+                $autores['mensaje'] = $result_edited;                
+                retornar_vista(VIEW_SET_AUTOR, $autores);
+                $autores = array();
+                $_POST = array();
             } else{
-                $autor = new AutorModel();
                 $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                retornar_vista(VIEW_SET_AUTOR, $autores); 
             }
             break;
         default:
@@ -122,9 +120,3 @@ function set_obj_libro()
     return $obj;
 }
 handler();
-
-
-
-
-
-

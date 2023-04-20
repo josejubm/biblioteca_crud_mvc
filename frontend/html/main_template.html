@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="../../frontend/css/estructura.css">
   <link rel="stylesheet" href="../../frontend/css/myStyles.css">
+  <link rel="stylesheet" href="../../frontend/css/ocultarCeldasTabla.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,17 +23,11 @@
       <li>
         <a href="#" class="active">
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+          <span class="links_name">Inicio</span>
         </a>
       </li>
       <li>
-        <a href="/dwp_2023_pf_bmanuel/prestamos/mostrar/">
-          <i class='bx bx-book-alt'></i>
-          <span class="links_name">PRETAMOS</span>
-        </a>
-      </li>
-      <li>
-        <a href="/dwp_2023_pf_bmanuel/libros/mostrar/">
+        <a href="/dwp_2023_pf_bmanuel/libros/set/">
           <i class='bx bx-box'></i>
           <span class="links_name">LIBROS</span>
         </a>
@@ -44,15 +39,21 @@
         </a>
       </li>
       <li>
-        <a href="/dwp_2023_pf_bmanuel/autores/mostrar/">
+        <a href="/dwp_2023_pf_bmanuel/autores/set/">
           <i class='bx bx-heart'></i>
           <span class="links_name">AUTORES</span>
         </a>
       </li>
       <li>
-        <a href="/dwp_2023_pf_bmanuel/usuarios/mostrar/">
+        <a href="/dwp_2023_pf_bmanuel/usuarios/set/">
           <i class='bx bx-user'></i>
           <span class="links_name">USUARIOS</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dwp_2023_pf_bmanuel/prestamos/mostrar/">
+          <i class='bx bx-book-alt'></i>
+          <span class="links_name">PRETAMOS</span>
         </a>
       </li>
       <!-- <li>
@@ -74,7 +75,7 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">BIBLIOTECA</span>
+        <span class="dashboard">BIBLIOTECA <h6>{TABLA_NAME}</h6></span>
       </div>
       <div class="search-box">
         <input type="text" placeholder="Buscar en Tabla {TABLA_NAME}" onkeyup="buscarEnTabla()" id="tfBuscar">

@@ -78,50 +78,25 @@ function retornar_vista($vista, $data = array(), $data_autor = array(), $data_ed
     } else {
         $alert = "";
     }
-    ########### fin mensaje de alerta ########
-
+ ########### fin mensaje de alerta ########
+    
     #######tabla contenido###
-    $comilla = "'";
+$comilla = "'";
+
     $tabla_body = '<tbody>';
     $contador_lista = 1;
-    foreach ($data['libros'] as $registro) {
+    foreach ($data['registros'] as $registro) {
         if (!empty($registro['ISBN']) && !empty($registro['TITULO'])) // Se verifica que el campo Nombre no esté vacío 
         {
             $fila = '<tr id="' . $registro['ISBN'] . '">';
             $fila .= '<td>' . $contador_lista++ . '</td>';
             $fila .= '<td>' . $registro['ISBN'] . '</td>';
             $fila .= '<td>' . $registro['TITULO'] . '</td>';
-            $fila .= '<td  class="celda_oculta">' . $registro['ID_EDITORIAL'] . '</td>';
-            $fila .= '<td>' . $registro['NOMBRE_EDITORIAL'] . '</td>';
-
-            /*  foreach ($registro['AUTORES'] as $autor) {
-                if ($registro['ISBN'] === $autor['ISBN_LIBRO']) {
-                    $fila .= '<td class="celda_oculta">' . $autor['ID_AUTOR'] . '</td>'; // Agregar el ID de autor en la fila
-                    $fila .= '<td class="celda_oculta">' . $autor['NOMBRE_COMPLETO_AUTOR'] . '</td>';
-                }
-            } */
-
-            $fila .= '<td class="celda_oculta">';
-            foreach ($registro['AUTORES'] as $autor) {
-                if ($registro['ISBN'] === $autor['ISBN_LIBRO']) {
-                    $fila .=  $autor['ID_AUTOR'] . '-';
-                }
-            }
-            $fila = rtrim($fila, '-'); 
-            $fila .= '</td>';
-
-            $fila .= '<td>';
-            foreach ($registro['AUTORES'] as $autor) {
-                if ($registro['ISBN'] === $autor['ISBN_LIBRO']) {
-                    $fila .= $autor['NOMBRE_COMPLETO_AUTOR'] . ',';
-                }
-            }
-            $fila = rtrim($fila, ','); // Eliminar la última coma y espacio en blanco
-            $fila .= '</td>';
-
-            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarLibro(' . $comilla . $registro['ISBN'] . $comilla . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
-            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla . $registro['ISBN'] . $comilla . ',' . $comilla . $registro['TITULO'] . $comilla . ')"><i class="bx bx-trash"></i>Eliminar</a>'
-                . '</td>';
+            $fila .= '<td>' . $registro['AUTOR'] . '</td>';
+            $fila .= '<td>' . $registro['EDITORIAL'] . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarLibro(' . $comilla. $registro['ISBN'].$comilla . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla.$registro['ISBN'] .$comilla. ','.$comilla. $registro['TITULO'] . $comilla.')"><i class="bx bx-trash"></i>Eliminar</a>' 
+            . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }
@@ -135,21 +110,23 @@ function retornar_vista($vista, $data = array(), $data_autor = array(), $data_ed
     foreach ($data_autor['registros'] as $autor) {
         if (!empty($autor['Id']) && !empty($autor['Nombre'])) // Se verifica que el campo Nombre no esté vacío 
         {
-            $options_autor .= '<option value="' . $autor['Id'] . '">'
-                . $autor['Nombre'] . ' ' . $autor['Paterno'] . ' ' . $autor['Materno'] . '</option>';
+            $options_autor .= '<option value="'. $autor['Id'].'">'
+                                 . $autor['Nombre'] . ' ' . $autor['Paterno'] . ' ' . $autor['Materno'] . '</option>';
+
         }
     }
     /* FIN options del form */
-    /* options del form EDITORIALES */
-    $options_editorial = '';
+      /* options del form EDITORIALES */
+      $options_editorial = '';
     foreach ($data_editorial['registros'] as $editorial) {
         if (!empty($editorial['Id']) && !empty($editorial['Nombre'])) // Se verifica que el campo Nombre no esté vacío 
         {
-            $options_editorial .= '<option value="' . $editorial['Id'] . '">'
-                . $editorial['Nombre'] . '</option>';
+            $options_editorial .= '<option value="'. $editorial['Id'].'">'
+                                 . $editorial['Nombre'] . '</option>';
+
         }
     }
-    /* FIN options del form */
+      /* FIN options del form */
 
     $html = str_replace('{contenido}', get_vista_html($vista), $html);
     $html = str_replace('{TBODY}', $tabla_body, $html);
@@ -157,7 +134,7 @@ function retornar_vista($vista, $data = array(), $data_autor = array(), $data_ed
     $html = str_replace('{options_autor}',  $options_autor, $html);
     $html = str_replace('{options_editorial}',  $options_editorial, $html);
     $html = str_replace('{TABLA_NAME}',  'LIBROS', $html);
-
+    
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

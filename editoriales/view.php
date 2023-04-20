@@ -1,10 +1,10 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_EDITORIAL =>    'Crear EDITORIAL',
-        VIEW_GET_EDITORIAL =>    'To EDITORIAL',
-        VIEW_DELETE_EDITORIAL => 'El EDITORIAL',
-        VIEW_EDIT_EDITORIAL =>   ' EDITORIAL'
+        VIEW_SET_EDITORIAL =>    'ADD EDITORIAL',
+        VIEW_GET_EDITORIAL =>    'SHOW EDITORIAL',
+        VIEW_DELETE_EDITORIAL => 'DELETE EDITORIAL',
+        VIEW_EDIT_EDITORIAL =>   'UPDATE EDITORIAL'
     ),
     'links_menu' => array(
         'VIEW_SET_EDITORIAL' =>      MODULO . VIEW_SET_EDITORIAL . '/',

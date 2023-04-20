@@ -1,10 +1,10 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_USUARIO =>    'Crear un nuevo autor',
-        VIEW_GET_USUARIO =>    'Todos Los Autores',
-        VIEW_DELETE_USUARIO => 'Eliminar un autor',
-        VIEW_EDIT_USUARIO =>   'Modificar autor'
+        VIEW_SET_USUARIO =>    'Add User',
+        VIEW_GET_USUARIO =>    'Show Users',
+        VIEW_DELETE_USUARIO => 'Delete User',
+        VIEW_EDIT_USUARIO =>   'Update User'
     ),
     'links_menu' => array(
         'VIEW_SET_USUARIO' =>      MODULO . VIEW_SET_USUARIO . '/',
@@ -90,9 +90,10 @@ function retornar_vista($vista, $data = array())
             $fila = '<tr id="' . $registro['Id'] . '">';
             $fila .= '<td>' . $contador_lista++ . '</td>';
             $fila .= '<td>' . $registro['Id'] . '</td>';
-            $fila .= '<td>' . $registro['Nombre'] . '</td>';
-            $fila .= '<td>' . $registro['Paterno'] . '</td>';
-            $fila .= '<td>' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
+            $fila .= '<td class="celda_oculta">' . $registro['Nombre'] . '</td>';
+            $fila .= '<td class="celda_oculta">' . $registro['Paterno'] . '</td>';
+            $fila .= '<td class="celda_oculta">' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
+            $fila .= '<td>' . $registro['Nombre'] .' '. $registro['Paterno'].' ' .$materno = !empty($registro['Materno']) ? $registro['Materno'] : '-'. '</td>';
             $fila .= '<td>' . $registro['Colonia'] . '</td>';
             $fila .= '<td>' . $registro['Calle'] . '</td>';
             $fila .= '<td>' . $registro['Numero'] . '</td>';

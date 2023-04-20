@@ -3,7 +3,7 @@
         {ALERT}
 
     <div class="sales-boxes" >
-        <div class="recent-sales box">
+        <div class="recent-sales box" >
             <form id="alta_libro" action="{SET}" method="POST">
 
                 <h2 id="title_libro">Registrar Nuevo Libro</h2><br>
@@ -20,6 +20,7 @@
                 </select>
 
                 <label for="autor" id="label_autores">Selecciona los Autores del Libro:</label>
+                <div id="autores-container"></div>
                 <select id="autor" required>
                     {options_autor}
                 </select> 
@@ -52,11 +53,13 @@
                 <table id="table">
                     <thead>
                         <tr>
-                            <th>N_lista</th>
+                            <th><i class='bx bx-list-ol'></i></th>
                             <th>ISBN</th>
                             <th>TITULO</th>
-                            <th>AUTORES</th>
+                            <!-- <th>ID EDITORIAL</th> -->
                             <th>EDITORIAL</th>
+                            <!-- <th>ID'S AUTORES</th> -->
+                            <th>AUTORES</th>
                             <th>accion editar</th>
                             <th>accion eliminar</th>
                         </tr>

@@ -47,7 +47,7 @@ function handler()
             break;
         case GET_AUTOR:
             $autores = $autor->get();
-            retornar_vista(VIEW_GET_AUTOR, $autores);
+            retornar_vista(VIEW_SET_AUTOR, $autores);
             break;
         case DELETE_AUTOR:
             if (!empty($_POST)) {
