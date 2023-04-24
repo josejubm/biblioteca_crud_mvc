@@ -1,0 +1,71 @@
+<div class="home-content">
+
+    {ALERT}
+
+<div class="sales-boxes" >
+    <div class="recent-sales box" >
+        <form id="alta_libro" action="{SET}" method="POST">
+
+            <h2 id="title_libro">Registrar Nuevo {TABLA_NAME}</h2><br>
+
+            <label for="salida"id="label_salida" >Fecha De Salida;</label>
+            <input type="date" name="salida" id="salida" required> <br><br>
+
+            <label for="devolucion" id="label_devolucion" class="celda_oculta" >Ingresa la Fecha de Devolucion:</label><br>
+            <input type="date" name="devolucion" id="devolucion" class="celda_oculta">
+
+            <label for="usuario" id="label_usuario"> Usuario:</label>
+            <select name="usuario" id="usuario" class="select_editorial" required >
+                {options_usuario}
+            </select>
+
+            <label for="libro" id="label_libro">Selecciona el Libro:</label>
+            <select id="libro" name="libro" class="select_editorial" required>
+                {options_libro}
+            </select> 
+
+            <br>
+
+            <button type="submit" id="btnGuardar" class="boton boton-outline-success">
+                <i class='bx bx-up-arrow-alt'></i>
+                GUARDAR
+            </button>
+            <button type="submit" id="btnModificar" class="boton boton-outline-warning" style="display: none;">
+                <i class='bx bx-save'></i>
+                ACTUALIZAR
+            </button>
+            <input type="reset" value="Cancelar" id="btnCancelar" onclick="cancelarUpdatePrestamo()" style="display: none;" class="boton boton-outline-danger">
+        </form>
+    </div>
+
+    <div class="top-sales box" >
+        <h2>Tabla de {TABLA_NAME}</h2><br>
+          
+        <form action="{DELETE}" method="POST">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th><i class='bx bx-list-ol'></i></th>
+                        <th>ISBN</th>
+                        <th>Titulo De Libro</th>
+                        <th>ClaveUsu </th>
+                        <th>Nombre del Usuario</th>
+                        <th>Salida</th>
+                        <th>Devolucion</th>
+                        <th>accion editar</th>
+                        <th>accion eliminar</th>
+                    </tr>
+                </thead>
+
+                {TBODY}
+
+            </table>
+        </form>
+        <div id="pagination-container">
+            <ul id="pagination">
+            </ul>
+        </div>
+    </div>
+    
+</div>
+</div>

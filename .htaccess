@@ -4,3 +4,4 @@ RewriteRule ^editoriales/ editoriales/controller.php
 
 RewriteRule ^libros/ libros/controller.php
 RewriteRule ^usuarios/ usuarios/controller.php
+RewriteRule ^prestamos/ prestamos/controller.php

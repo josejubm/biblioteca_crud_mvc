@@ -1,16 +1,16 @@
 <?php
 #modulo
-const MODULO = 'editoriales/';
+const MODULO = 'prestamos/';
 # controladores
-const SET_LIBRO = 'set';
-const GET_LIBRO = 'get';
-const DELETE_LIBRO = 'delete';
-const EDIT_LIBRO = 'edit';
+const SET_PRESTAMO = 'set';
+const GET_PRESTAMO = 'get';
+const DELETE_PRESTAMO = 'delete';
+const EDIT_PRESTAMO = 'edit';
 
 #vistas_de_modulo 
-const VIEW_SET_LIBRO = 'agregar';
-const VIEW_GET_LIBRO = 'mostrar';
-const VIEW_DELETE_LIBRO = 'borrar';
-const VIEW_EDIT_LIBRO = 'modificar';
+const VIEW_SET_PRESTAMO = 'agregar';
+const VIEW_GET_PRESTAMO = 'mostrar';
+const VIEW_DELETE_PRESTAMO = 'borrar';
+const VIEW_EDIT_PRESTAMO = 'modificar';
 ?>
 

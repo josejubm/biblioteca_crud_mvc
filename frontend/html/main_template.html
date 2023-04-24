@@ -101,7 +101,7 @@
           <a class="modal-cerrar" onclick="ocultarModal()">&times;</a>
         </div>
         <div class="modal-cuerpo">
-          <p>ELIMINAR {TABLA_NAME} :  <span id="id_a_eliminar" style="color: green; font-size: 1.5em;"></span></p>
+          <p id="text_an">ELIMINAR {TABLA_NAME} :</p><p><span id="id_a_eliminar" style="color: green; font-size: 1.5em;"></span></p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="boton boton-outline-danger"><i class="bx bx-trash"></i>Eliminar</button>
@@ -111,9 +111,12 @@
       </form>
     </div>
   </div>
-
+<!-- ESTOS SON LOS SCRIPTS "GLOBALES QUE USAN TODOS" -->
   <script src="../../frontend/js/script.js"></script>
   <script src="../../frontend/js/copyToForm.js"></script>
+  <!--AQUI SE INPORTA EL SCRIPT DE CADA MODULO-->
+  <!--MODULO_JS-->
+
 </body>
 
 </html>

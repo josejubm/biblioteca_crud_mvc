@@ -22,7 +22,8 @@ class LibroModel extends DBAbstractModel
 
         foreach ($this->rows as $row) {
             // obtener los autores correspondientes a este libro
-            $query_autores = "SELECT libros_autores.ISBN AS ISBN, autores.Id AS ID_AUTOR, CONCAT(autores.Nombre, ' ', autores.Paterno, ' ', autores.Materno) AS NOMBRE_COMPLETO_AUTOR
+            $query_autores = "SELECT libros_autores.ISBN AS ISBN, autores.Id AS ID_AUTOR, 
+                            CONCAT(autores.Nombre, ' ', autores.Paterno, ' ', autores.Materno) AS NOMBRE_COMPLETO_AUTOR
                           FROM autores, libros_autores
                           WHERE libros_autores.ISBN = '{$row['ISBN']}' AND libros_autores.autor_Id = autores.Id;";
             $this->query = $query_autores;

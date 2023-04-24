@@ -3,8 +3,8 @@ require_once('constants.php');
 require_once('model.php');
 require_once('view.php');
 
-require_once('../editoriales/model.php');
-require_once('../autores/model.php');
+require_once('../usuarios/model.php');
+require_once('../libros/model.php');
 
 function handler()
 {
@@ -14,11 +14,11 @@ function handler()
         exit();
     } */
 
-    $event = VIEW_GET_LIBRO;
+    $event = VIEW_GET_PRESTAMO;
     $uri = $_SERVER['REQUEST_URI'];
     $peticiones = array(
-        SET_LIBRO,          GET_LIBRO,          DELETE_LIBRO,           EDIT_LIBRO,
-        VIEW_SET_LIBRO,     VIEW_GET_LIBRO,     VIEW_DELETE_LIBRO,      VIEW_EDIT_LIBRO
+        SET_PRESTAMO,          GET_PRESTAMO,          DELETE_PRESTAMO,           EDIT_PRESTAMO,
+        VIEW_SET_PRESTAMO,     VIEW_GET_PRESTAMO,     VIEW_DELETE_PRESTAMO,      VIEW_EDIT_PRESTAMO
     );
 
     foreach ($peticiones as $peticion) {
@@ -28,95 +28,96 @@ function handler()
         }
     }
 
-    $libro = set_obj_libro();
+    $prestamo = set_obj_prestamo();
 
     switch ($event) {
-        case SET_LIBRO:
+        case SET_PRESTAMO:
             if (!empty($_POST)) {
-
-                print_r($_POST);
-               $result_set = $libro->set($_POST);
-
-               print_r($result_set);
-
-                $autor = new AutorModel();
-                $autores = $autor->get();
-
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-
+               $result_set = $prestamo->set($_POST);
+                $libro = new LibroModel();
                 $libros = $libro->get();
-                $libros['mensaje'] = $result_set;
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                $prestamos['mensaje'] = $result_set;
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
             } else {
-
-                $autor = new AutorModel();
-                $autores = $autor->get();
-
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-
+                $libro = new LibroModel();
                 $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
             }
             break;
-        case GET_LIBRO:
-            $libros = $libro->get();
-            retornar_vista(VIEW_SET_LIBRO, $libros);
-            break;
-        case DELETE_LIBRO:
-            if (!empty($_POST)) {
-                $result_delete = $libro->delete($_POST['id_delete']);
+        case GET_PRESTAMO:
+                $libro = new LibroModel();
                 $libros = $libro->get();
-                $libros['mensaje'] = $result_delete;
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
+            break;
+        case DELETE_PRESTAMO:
+            if (!empty($_POST)) {
+          
+                $result_delete = $prestamo->delete($_POST);
+                $prestamos = $prestamo->get();
+                $prestamos['mensaje'] = $result_delete;
                 // Verificar si hay un mensaje de eliminación
-                if ($libros['mensaje']['tipo'] == 'success') {
+                if ($prestamos['mensaje']['tipo'] == 'success') {
                     // Mostrar el mensaje
-                    echo $libros['mensaje'];
+                    echo $prestamos['mensaje'];
                     // Eliminar el registro correspondiente del array de registros
-                    foreach ($libros['registros'] as $key => $registro) {
+                    foreach ($prestamos['registros'] as $key => $registro) {
                         if ($registro['Id'] == $_POST['id_delete']) {
-                            unset($libros['registros'][$key]);
+                            unset($prestamos['registros'][$key]);
                             break;
                         }
                     }
                 }
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
-                $_POST = array();
-            } else {
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
+                $libro = new LibroModel();
                 $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
+            } else {
+                $libro = new LibroModel();
+                $libros = $libro->get();
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
             }
             break;
-        case EDIT_LIBRO:
-            if (!empty($_POST) && $_POST['nombre'] != '') {
-                $result_edited = $autor->edit($_POST);
-                $autores = $autor->get();
-                $autores['mensaje'] = $result_edited;                
-                retornar_vista(VIEW_SET_AUTOR, $autores);
-                $autores = array();
-                $_POST = array();
+        case EDIT_PRESTAMO: 
+            if (!empty($_POST)) {
+                $result_edited = $prestamo->edit($_POST);
+                $libro = new LibroModel();
+                $libros = $libro->get();
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                $prestamos['mensaje'] = $result_edited;
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
+                
             } else{
-                $autores = $autor->get();
-                retornar_vista(VIEW_SET_AUTOR, $autores); 
+                $libro = new LibroModel();
+                $libros = $libro->get();
+                $usuario = new UsuarioModel();
+                $usuarios = $usuario->get();
+                $prestamos = $prestamo->get();
+                retornar_vista(VIEW_SET_PRESTAMO, $prestamos, $usuarios, $libros);
             }
             break;
         default:
-            $autores = $libro->get();
-            retornar_vista($event, $autores);
+           /*  $autores = $libro->get();
+            retornar_vista($event, $autores); */
     }
 }
-function set_obj_libro()
+function set_obj_prestamo()
 {
-    $obj = new LibroModel();
+    $obj = new PrestamoModel();
     return $obj;
 }
 handler();
