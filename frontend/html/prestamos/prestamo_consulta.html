@@ -1,0 +1,97 @@
+<div class="home-content">
+
+    <div class="overview-boxes">
+      <div class="box" >
+        <div class="right-side">
+          <div class="box-topic">Prestamos por Mes </div>
+          <form action="{CONSULTAS}" class="fechas" method="post"><br>
+              <select name="mes" id="mes" class="select_editorial">
+                <option value="">Selecciona un Mes</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+              </select>
+            <button class="boton boton-outline-info">Consultar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="box" >
+        <div class="right-side">
+          <div class="box-topic">Prestamos del Dia de Hoy </div>
+          <form action="{CONSULTAS}" class="fechas" method="post">
+              <!--{HOY}-->
+              <p>Se mostrar los prestamos realizados durante el dia</p>
+              <br>
+            <button class="boton boton-outline-info">Consultar</button>
+          </form>
+        </div>
+      </div>
+        <div class="box" >
+          <div class="right-side">
+            <div class="box-topic">Prestamos por fecha de Salida </div>
+            <form action="{CONSULTAS}" class="fechas" method="post"><br>
+                <input name="Fsalida" type="date" >
+                <br><br>
+              <button class="boton boton-outline-info">Consultar</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="box" >
+          <div class="right-side">
+            <div class="box-topic">Prestamos por fecha de Devolucion </div>
+            <form action="{CONSULTAS}" class="fechas" method="post"><br>
+                <input name="Fdevolucion" type="date">
+                <br><br>
+              <button class="boton boton-outline-info">Consultar</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      
+<div class="sales-boxes">
+
+    <div class="top-sales box" style="width: 100%;">
+        <h2>{TABLA_NAME}</h2><br>
+        <div class="botones_url">
+          <ul>
+              <a href="/dwp_2023_pf_bmanuel/prestamos/set/" class="boton boton-outline-success"> Agregar Nuevo Prestamo </a>            
+          </ul>
+      </div> <br>
+          <h3><!-- {consulta_tipo} --></h3>
+        <form action="{DELETE}" method="POST">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th><i class='bx bx-list-ol'></i></th>
+                        <th>ISBN</th>
+                        <th>Titulo De Libro</th>
+                        <th>ClaveUsu </th>
+                        <th>Nombre del Usuario</th>
+                        <th>Salida</th>
+                        <th>Devolucion</th>
+                    </tr>
+                </thead>
+
+                {TBODY}
+
+            </table>
+        </form>
+        <div id="pagination-container">
+            <ul id="pagination">
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

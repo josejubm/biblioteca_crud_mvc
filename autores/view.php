@@ -1,10 +1,10 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_AUTOR =>    'Crear un nuevo autor',
-        VIEW_GET_AUTOR =>    'Todos Los Autores',
-        VIEW_DELETE_AUTOR => 'Eliminar un autor',
-        VIEW_EDIT_AUTOR =>   'Modificar autor'
+        VIEW_SET_AUTOR =>    'Agregar Autor',
+        VIEW_GET_AUTOR =>    'Ver Autores',
+        VIEW_DELETE_AUTOR => 'Eliminar Autor',
+        VIEW_EDIT_AUTOR =>   'Modificar Autor'
     ),
     'links_menu' => array(
         'VIEW_SET_AUTOR' =>      MODULO . VIEW_SET_AUTOR . '/',
@@ -108,6 +108,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{ALERT}', $alert, $html);
     $html = str_replace('{total_autor}', $contador_lista, $html);
     $html = str_replace('{TABLA_NAME}', 'AUTOR', $html);
+    $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Autores.js"></script>', $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

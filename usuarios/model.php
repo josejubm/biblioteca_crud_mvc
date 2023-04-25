@@ -74,7 +74,7 @@ class UsuarioModel extends DBAbstractModel
 
     public function edit($data_new = array())
     {
-        $id_old = $data_new['id_old'];
+        $id_old = $data_new['ClaveUsu_old'];
         $id  = $data_new['ClaveUsu'];
         $nombre  = $data_new['nombre'];
         $paterno = $data_new['paterno'];
@@ -98,7 +98,7 @@ class UsuarioModel extends DBAbstractModel
                             Calle='$calle',
                             Numero='$numero',
                             Telefono = '$telefono'
-                            WHERE ClaveUso=$id_old";
+                            WHERE ClaveUsu=$id_old";
             $this->execute_single_query();
  
              $mensaje = $this->mensaje = "SE MODIFICO EL USUARIO: " . $data[0]['Nombre'] . " " . $data[0]['Paterno'] ." " . $data[0]['Materno'] . "";
@@ -139,35 +139,5 @@ class UsuarioModel extends DBAbstractModel
                 'menss' => $mensaje
             );
         }
-    }
-
-    public function get_Two()
-    {
-        $this->query = "SELECT * FROM usuarios";
-        $this->get_results_from_query();
-
-        if (!$this->rows) {
-            return [
-                'mensaje' => 'No se encontraron usuarios',
-                'registros' => []
-            ];
-        }
-        $resultados = array_map(function ($row) {
-            return [
-                'Id' => $row['ClaveUsu'],
-                'Nombre' => $row['Nombre'],
-                'Paterno' => $row['Paterno'],
-                'Materno' => $row['Materno'],
-                'Colonia' => $row['Colonia'],
-                'Calle' => $row['Calle'],
-                'Numero' => $row['Numero'],
-                'Telefono' => $row['Telefono']
-            ];
-        }, $this->rows);
-
-        return [
-            'mensaje' => 'USUARIOS encontrados',
-            'registros' => $resultados
-        ];
     }
 }

@@ -1,10 +1,10 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_USUARIO =>    'Add User',
-        VIEW_GET_USUARIO =>    'Show Users',
-        VIEW_DELETE_USUARIO => 'Delete User',
-        VIEW_EDIT_USUARIO =>   'Update User'
+        VIEW_SET_USUARIO =>    'Agregar Usuario',
+        VIEW_GET_USUARIO =>    'Ver Usuarios',
+        VIEW_DELETE_USUARIO => 'Eliminar Usuarios',
+        VIEW_EDIT_USUARIO =>   'Actualizar Usuarios'
     ),
     'links_menu' => array(
         'VIEW_SET_USUARIO' =>      MODULO . VIEW_SET_USUARIO . '/',
@@ -79,7 +79,7 @@ function retornar_vista($vista, $data = array())
         $alert = "";
     }
  ########### fin mensaje de alerta ########
-    
+
     #######tabla contenido USUARIOS###
     $comilla = "'";
     $tabla_body = '<tbody>';
@@ -93,14 +93,14 @@ function retornar_vista($vista, $data = array())
             $fila .= '<td class="celda_oculta">' . $registro['Nombre'] . '</td>';
             $fila .= '<td class="celda_oculta">' . $registro['Paterno'] . '</td>';
             $fila .= '<td class="celda_oculta">' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
-            $fila .= '<td>' . $registro['Nombre'] .' '. $registro['Paterno'].' ' .$materno = !empty($registro['Materno']) ? $registro['Materno'] : '-'. '</td>';
+            $fila .= '<td>' . $registro['Nombre'] . ' ' . $registro['Paterno'] . ' ' . $materno = !empty($registro['Materno']) ? $registro['Materno'] : '-' . '</td>';
             $fila .= '<td>' . $registro['Colonia'] . '</td>';
             $fila .= '<td>' . $registro['Calle'] . '</td>';
             $fila .= '<td>' . $registro['Numero'] . '</td>';
             $fila .= '<td>' . $registro['Telefono'] . '</td>';
-            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarUsuario(' . $comilla. $registro['Id'] .$comilla. ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
-            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla.$registro['Id'] .$comilla. ','.$comilla. $registro['Nombre'] .' '.$registro['Paterno'] .$comilla. ')"><i class="bx bx-trash"></i>Eliminar</a>' 
-                            . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-warning" href="#" onclick="editarUsuario(' . $comilla . $registro['Id'] . $comilla . ')"><i class="bx bx-edit"></i>Editar</a>' . '</td>';
+            $fila .= '<td>' . '<a class="boton boton-outline-danger" href="#" onclick="mostrarModal(' . $comilla . $registro['Id'] . $comilla . ',' . $comilla . $registro['Nombre'] . ' ' . $registro['Paterno'] . $comilla . ')"><i class="bx bx-trash"></i>Eliminar</a>'
+                . '</td>';
             $tabla_body .= $fila . '</tr>';
         }
     }
@@ -113,6 +113,8 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{TBODY}', $tabla_body, $html);
     $html = str_replace('{ALERT}', $alert, $html);
     $html = str_replace('{TABLA_NAME}', 'USUARIOS', $html);
+    /* insertar estilos y escripts propios del modulo */
+    $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Usuarios.js"></script>', $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

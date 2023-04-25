@@ -104,6 +104,8 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{TBODY}', $tabla_body, $html);
     $html = str_replace('{ALERT}', $alert, $html); 
     $html = str_replace('{TABLA_NAME}', 'EDITORIAL', $html);
+    $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Editoriales.js"></script>', $html);
+
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

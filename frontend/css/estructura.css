@@ -50,10 +50,10 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li a.active{
-  background: #005187;
+  background: #116196;
 }
 .sidebar .nav-links li a:hover{
-  background: #5086c1;
+  background: #116196;
 }
 .sidebar .nav-links li i{
   min-width: 60px;
@@ -258,7 +258,6 @@ nav .profile-details i{
   justify-content: space-between;
   /* padding: 0 20px; */
 }
-
 /* left box */
 .home-content .sales-boxes .recent-sales{
   width: 35%;

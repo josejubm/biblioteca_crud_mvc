@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="iso-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="../../frontend/css/estructura.css">
   <link rel="stylesheet" href="../../frontend/css/myStyles.css">
@@ -10,20 +10,20 @@
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> B: {subtitulo} </title>
+  <title> {subtitulo} </title>
 </head>
 
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bx-book-reader'></i>
+      <i class='bx bx-library'></i>
       <span class="logo_name"> HOME </span>
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
+        <a href="/dwp_2023_pf_bmanuel/home/home/" class="active">
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Inicio</span>
+          <span class="links_name">INICIO</span>
         </a>
       </li>
       <li>
@@ -51,17 +51,18 @@
         </a>
       </li>
       <li>
-        <a href="/dwp_2023_pf_bmanuel/prestamos/mostrar/">
+        <a href="/dwp_2023_pf_bmanuel/prestamos/set/">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">PRETAMOS</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-cog'></i>
-          <span class="links_name">Setting</span>
+      <li>
+        <a href="/dwp_2023_pf_bmanuel/prestamos/cons/">
+          <i class='bx bx-book-alt'></i>
+          <span class="links_name">Consultas de<br> prestamos</span>
         </a>
-      </li> -->
+      </li>
+    
       <li class="log_out">
         <a href="#">
           <i class='bx bx-log-out'></i>
@@ -101,17 +102,19 @@
           <a class="modal-cerrar" onclick="ocultarModal()">&times;</a>
         </div>
         <div class="modal-cuerpo">
-          <p id="text_an">ELIMINAR {TABLA_NAME} :</p><p><span id="id_a_eliminar" style="color: green; font-size: 1.5em;"></span></p>
+          <p id="text_an">ELIMINAR {TABLA_NAME} :</p>
+          <p><span id="id_a_eliminar" style="color: green; font-size: 1.5em;"></span></p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="boton boton-outline-danger"><i class="bx bx-trash"></i>Eliminar</button>
-          <a style="margin-left: 50px;" href="#" class="boton boton-outline-secondary" onclick="ocultarModal()"><i class="bx bx-x"></i>
-           CANCELAR</a>
+          <a style="margin-left: 50px;" href="#" class="boton boton-outline-secondary" onclick="ocultarModal()"><i
+              class="bx bx-x"></i>
+            CANCELAR</a>
         </div>
       </form>
     </div>
   </div>
-<!-- ESTOS SON LOS SCRIPTS "GLOBALES QUE USAN TODOS" -->
+  <!-- ESTOS SON LOS SCRIPTS "GLOBALES QUE USAN TODOS" -->
   <script src="../../frontend/js/script.js"></script>
   <script src="../../frontend/js/copyToForm.js"></script>
   <!--AQUI SE INPORTA EL SCRIPT DE CADA MODULO-->

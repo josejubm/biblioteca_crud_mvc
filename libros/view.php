@@ -1,10 +1,10 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_LIBRO =>    'add libro',
-        VIEW_GET_LIBRO =>    'show libros',
-        VIEW_DELETE_LIBRO => 'delete libro',
-        VIEW_EDIT_LIBRO =>   'Modificar libro'
+        VIEW_SET_LIBRO =>    'Agregar Libro',
+        VIEW_GET_LIBRO =>    'Ver Libros',
+        VIEW_DELETE_LIBRO => 'Eliminar Libro',
+        VIEW_EDIT_LIBRO =>   'Modificar Libro'
     ),
     'links_menu' => array(
         'VIEW_SET_LIBRO' =>      MODULO . VIEW_SET_LIBRO . '/',
@@ -157,6 +157,8 @@ function retornar_vista($vista, $data = array(), $data_autor = array(), $data_ed
     $html = str_replace('{options_autor}',  $options_autor, $html);
     $html = str_replace('{options_editorial}',  $options_editorial, $html);
     $html = str_replace('{TABLA_NAME}',  'LIBROS', $html);
+    $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Libros.js"></script>', $html);
+
 
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);

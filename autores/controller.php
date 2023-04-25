@@ -6,7 +6,7 @@ function handler()
 {
     // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
     if (empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === MODULO) {
-        header("Location: " . MODULO . VIEW_GET_AUTOR . "/");
+        header("Location: " . MODULO . VIEW_SET_AUTOR . "/");
         exit();
     }
 
@@ -26,70 +26,45 @@ function handler()
 
     $autor = set_obj_autor();
 
+    session_start();
+
     switch ($event) {
         case SET_AUTOR:
             if (!empty($_POST) && $_POST['nombre'] != '') {
-                $autor_data_insert = array();
-                $autor_data_insert['nombre'] = $_POST['nombre'];
-                $autor_data_insert['paterno'] = $_POST['paterno'];
-                $autor_data_insert['materno'] = $_POST['materno'];
-                $result = $autor->set($autor_data_insert);
-                $autor_data_insert = array();
-                $_POST = array();
-                $autores = $autor->get();
-                $autores['mensaje'] = $result;
-                retornar_vista(VIEW_SET_AUTOR, $autores);
-                $autores = array();
+                $result_set = $autor->set($_POST);
+                $_SESSION['mensaje_action'] = $result_set;
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');
             } else {
-                $autores = $autor->get();
-                retornar_vista(VIEW_SET_AUTOR, $autores);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');
             }
             break;
         case GET_AUTOR:
-            $autores = $autor->get();
+            $mensaje = isset($_SESSION['mensaje_action']) ? $_SESSION['mensaje_action'] : '';
+            unset($_SESSION['mensaje_action']);
+            $autores = $autor->get(); 
+            $autores['mensaje'] = $mensaje;
             retornar_vista(VIEW_SET_AUTOR, $autores);
             break;
         case DELETE_AUTOR:
             if (!empty($_POST)) {
                 $result_delete = $autor->delete($_POST['id_delete']);
-                $autores = $autor->get();
-                $autores['mensaje'] = $result_delete;
-                // Verificar si hay un mensaje de eliminación
-                if ($autores['mensaje']['tipo'] == 'success') {
-                    // Mostrar el mensaje
-                    echo $autores['mensaje'];
-                    // Eliminar el registro correspondiente del array de registros
-                    foreach ($autores['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['id_delete']) {
-                            unset($autores['registros'][$key]);
-                            break;
-                        }
-                    }
-                }
-                retornar_vista(VIEW_SET_AUTOR, $autores);
-                $_POST = array();
+                $_SESSION['mensaje_action'] = $result_delete;
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');  
             } else {
-                $autores = $autor->get();
-                retornar_vista(VIEW_SET_AUTOR, $autores);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');
             }
-            /* header("Location: /dwp_2023_pf_bmanuel/autores/mostrar/"); */
             break;
         case EDIT_AUTOR:
             if (!empty($_POST) && $_POST['nombre'] != '') {
                 $result_edited = $autor->edit($_POST);
-                $autores = $autor->get();
-                $autores['mensaje'] = $result_edited;                
-                retornar_vista(VIEW_SET_AUTOR, $autores);
-                $autores = array();
-                $_POST = array();
+                $_SESSION['mensaje_action'] = $result_edited;
+                header('Location:  http://localhost/dwp_2023_pf_bmanuel/autores/set/');
             } else{
-                $autores = $autor->get();
-                retornar_vista(VIEW_SET_AUTOR, $autores); 
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');
             }
             break;
         default:
-            $autores = $autor->get();
-            retornar_vista($event, $autores);
+        header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_AUTOR . '/');
     }
 }
 function set_obj_autor()

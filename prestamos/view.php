@@ -1,22 +1,25 @@
 <?php
 $diccionario = array(
     'subtitulo' => array(
-        VIEW_SET_PRESTAMO =>    'add libro',
-        VIEW_GET_PRESTAMO =>    'show libros',
-        VIEW_DELETE_PRESTAMO => 'delete libro',
-        VIEW_EDIT_PRESTAMO =>   'Modificar libro'
+        VIEW_SET_PRESTAMO =>    'Agregar Prestamo',
+        VIEW_GET_PRESTAMO =>    'Ver Prestamos',
+        VIEW_DELETE_PRESTAMO => 'Eliminar Prestamo',
+        VIEW_EDIT_PRESTAMO =>   'Modificar Prestamos',
+        VIEW_CONSULTAS_PRESTAMO => 'CONSULTAS'
     ),
     'links_menu' => array(
         'VIEW_SET_PRESTAMO' =>      MODULO . VIEW_SET_PRESTAMO . '/',
         'VIEW_GET_PRESTAMO' =>      MODULO . VIEW_GET_PRESTAMO . '/',
         'VIEW_EDIT_PRESTAMO' =>     MODULO . VIEW_EDIT_PRESTAMO . '/',
-        'VIEW_DELETE_PRESTAMO' =>   MODULO . VIEW_DELETE_PRESTAMO . '/'
+        'VIEW_DELETE_PRESTAMO' =>   MODULO . VIEW_DELETE_PRESTAMO . '/',
+        'VIEW_CONSULT_PRESTAMO' =>   MODULO . VIEW_CONSULTAS_PRESTAMO . '/'
     ),
     'form_actions' => array(
         'SET' =>    '/dwp_2023_pf_bmanuel/' . MODULO . SET_PRESTAMO . '/',
         'GET' =>    '/dwp_2023_pf_bmanuel/' . MODULO . GET_PRESTAMO . '/',
         'DELETE' => '/dwp_2023_pf_bmanuel/' . MODULO . DELETE_PRESTAMO . '/',
-        'EDIT' =>   '/dwp_2023_pf_bmanuel/' . MODULO . EDIT_PRESTAMO . '/'
+        'EDIT' =>   '/dwp_2023_pf_bmanuel/' . MODULO . EDIT_PRESTAMO . '/',
+        'CONSULTAS' =>   '/dwp_2023_pf_bmanuel/' . MODULO . CONSULT . '/'
     )
 );
 
@@ -85,9 +88,9 @@ function retornar_vista($vista, $data = array(), $data_usuario = array(), $data_
             $idp = $registro['ClaveUsu'].$registro['ISBN'].$registro['SALIDA'] ;
             $fila = '<tr id="'. $idp.'">';
             $fila .= '<td>' . $contador_lista++ . '</td>';
-            $fila .= '<td>' . $registro['ISBN'] . '</td>';
+            $fila .= '<td class="celda_oculta">' . $registro['ISBN'] . '</td>';
             $fila .= '<td>' . $registro['TITULO'] . '</td>';
-            $fila .= '<td>' . $registro['ClaveUsu'] . '</td>';
+            $fila .= '<td class="celda_oculta">' . $registro['ClaveUsu'] . '</td>';
             $fila .= '<td>' . $registro['NombreCompleto'] . '</td>';
             $fila .= '<td>' . $registro['SALIDA'] . '</td>';
             $fila .= '<td>' . $Devolucion = !empty($registro['DEVOLUCION']) ? $registro['DEVOLUCION'] : 'Pendiente: Sin Entregar' .  '</td>';
@@ -151,4 +154,56 @@ function retornar_vista($vista, $data = array(), $data_usuario = array(), $data_
     $html = render_dinamic_data($html, $diccionario['links_menu']);
 
     print $html;
+}
+
+function retornar_vista_consultas($vistaU, $data = array(), $mensaje)
+{
+    global $diccionario;
+    $html = get_main_template('template');
+    $html = str_replace('{subtitulo}', $diccionario['subtitulo'][$vistaU], $html);
+
+
+    #######tabla contenido###
+    $comilla = "'";
+    $tabla_body = '<tbody>';
+    $contador_lista = 1;
+    foreach ($data['registros'] as $registro) {
+        if (!empty($registro['ISBN']) && !empty($registro['TITULO'])) // Se verifica que el campo Nombre no esté vacío 
+        {
+            $idp = $registro['ClaveUsu'].$registro['ISBN'].$registro['SALIDA'] ;
+            $fila = '<tr id="'. $idp.'">';
+            $fila .= '<td>' . $contador_lista++ . '</td>';
+            $fila .= '<td>' . $registro['ISBN'] . '</td>';
+            $fila .= '<td>' . $registro['TITULO'] . '</td>';
+            $fila .= '<td >' . $registro['ClaveUsu'] . '</td>';
+            $fila .= '<td>' . $registro['NombreCompleto'] . '</td>';
+            $fila .= '<td>' . $registro['SALIDA'] . '</td>';
+            $fila .= '<td>' . $Devolucion = !empty($registro['DEVOLUCION']) ? $registro['DEVOLUCION'] : 'Pendiente: Sin Entregar' .  '</td>';
+            $tabla_body .= $fila . '</tr>';
+        }
+    }
+    $tabla_body .= '</tbody>';
+    ######fin tabla#######
+
+
+
+    /* pone la vista del modulo en la pagina padre  */
+    $html = str_replace('{contenido}', get_vista_html($vistaU), $html);
+    /* el contenido de la tabla */
+    $html = str_replace('{TBODY}', $tabla_body, $html);
+    /* pone el nombre del modulo en la pagina */
+    $html = str_replace('{TABLA_NAME}',  'PRESTAMOS', $html);
+    $html = str_replace('<!-- {consulta_tipo} -->',  $mensaje, $html);
+    /* insertar estilos y escripts propios del modulo */
+    $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Prestamos.js"></script>', $html);
+
+    $html = str_replace('<!--{HOY}-->', '<input class="celda_oculta"  type="date" name="fecha_dia" value="' . date("Y-m-d") . '">', $html);
+
+    $html = render_dinamic_data($html, $diccionario['form_actions']);
+    $html = render_dinamic_data($html, $diccionario['links_menu']);
+
+
+    print $html;
+
+    
 }

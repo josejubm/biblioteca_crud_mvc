@@ -9,6 +9,7 @@ require_once('../autores/model.php');
 
 function handler()
 {
+    session_start();
         // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
     if (empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === MODULO) {
         header("Location: /dwp_2023_pf_bmanuel/libros/set/");
@@ -35,85 +36,46 @@ function handler()
         case SET_LIBRO:
             if (!empty($_POST)) {
                $result_set = $libro->set($_POST);
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                $libros = $libro->get();
-                $libros['mensaje'] = $result_set;
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+               $_SESSION['mensaje_action'] = $result_set;
+               header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
             } else {
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
             }
             break;
         case GET_LIBRO:
+            $mensaje = isset($_SESSION['mensaje_action']) ? $_SESSION['mensaje_action'] : '';
+            unset($_SESSION['mensaje_action']);
+            $autor = new AutorModel();
+            $autores = $autor->get();
+            $editorial = new EditorialModel;
+            $editoriales = $editorial->get();
             $libros = $libro->get();
-            retornar_vista(VIEW_SET_LIBRO, $libros);
+            $libros['mensaje'] = $mensaje;
+            retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+            
             break;
         case DELETE_LIBRO:
             if (!empty($_POST)) {
                 $result_delete = $libro->delete($_POST['id_delete']);
-                $libros = $libro->get();
-                $libros['mensaje'] = $result_delete;
-                // Verificar si hay un mensaje de eliminación
-                if ($libros['mensaje']['tipo'] == 'success') {
-                    // Mostrar el mensaje
-                    echo $libros['mensaje'];
-                    // Eliminar el registro correspondiente del array de registros
-                    foreach ($libros['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['id_delete']) {
-                            unset($libros['registros'][$key]);
-                            break;
-                        }
-                    }
-                }
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
-                $_POST = array();
+                $_SESSION['mensaje_action'] = $result_delete;
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
             } else {
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
             }
             break;
         case EDIT_LIBRO:
             if (!empty($_POST) ) {
-
-                $autor = new AutorModel();
-                $autores = $autor->get();
-
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-
                 $result_edited = $libro->edit($_POST);
+                $_SESSION['mensaje_action'] = $result_edited;
 
-                $libros = $libro->get();
-                $libros['mensaje'] = $result_edited;
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
-               
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
             } else{
-                $autor = new AutorModel();
-                $autores = $autor->get();
-                $editorial = new EditorialModel;
-                $editoriales = $editorial->get();
-                $libros = $libro->get();
-                retornar_vista(VIEW_SET_LIBRO, $libros, $autores, $editoriales);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
+
             }
             break;
         default:
-            $autores = $libro->get();
-            retornar_vista($event, $autores);
+        header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_LIBRO . '/');
     }
 }
 function set_obj_libro()

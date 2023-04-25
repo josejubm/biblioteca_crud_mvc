@@ -4,6 +4,7 @@ require_once('model.php');
 require_once('view.php');
 function handler()
 {
+    session_start();
     // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
     if (empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === MODULO) {
         header("Location: " . MODULO . VIEW_GET_EDITORIAL . "/");
@@ -29,65 +30,41 @@ function handler()
     switch ($event) {
       case SET_EDITORIAL:
             if (!empty($_POST) && $_POST['nombre'] != '') {
-             $result = $editorial->set($_POST);
-            
-                $editoriales = $editorial->get();
-                $editoriales['mensaje'] = $result;
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
-                $editoriales = array();
+             $result_set = $editorial->set($_POST); 
+             $_SESSION['mensaje_action'] = $result_set;
+             header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             } else {
-                $editoriales = $editorial->get();
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
+            header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             }
             break;
         case GET_EDITORIAL:
+            $mensaje = isset($_SESSION['mensaje_action']) ? $_SESSION['mensaje_action'] : '';
+            unset($_SESSION['mensaje_action']);
             $editoriales = $editorial->get();
-            retornar_vista(VIEW_GET_EDITORIAL, $editoriales);
+            $editoriales['mensaje'] = $mensaje;
+            retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
             break;
         case DELETE_EDITORIAL:
             if (!empty($_POST)) {
                 $result_delete = $editorial->delete($_POST['id_delete']);
-                $editoriales = $editorial->get();
-
-                $editoriales['mensaje'] = $result_delete;
-
-                // Verificar si hay un mensaje de eliminación
-                if ($editoriales['mensaje']['tipo'] == 'success') {
-                    // Mostrar el mensaje
-                    echo $editoriales['mensaje'];
-                    // Eliminar el registro correspondiente del array de registros
-                    foreach ($editoriales['registros'] as $key => $registro) {
-                        if ($registro['Id'] == $_POST['id_delete']) {
-                            unset($editoriales['registros'][$key]);
-                            break;
-                        }
-                    }
-                }
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
-                $_POST = array();
+                $_SESSION['mensaje_action'] = $result_delete;
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             } else {
-                $editoriales = $editorial->get();
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             }
-            /* header("Location: /dwp_2023_pf_bmanuel/autores/mostrar/"); */
            break;
        case EDIT_EDITORIAL:
             if (!empty($_POST) && $_POST['nombre'] != '') {
                 $result_edited = $editorial->edit($_POST);
-                $editoriales = $editorial->get();
-                $editoriales['mensaje'] = $result_edited;                
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales);
-                $editoriales = array();
-                $_POST = array();
+                $_SESSION['mensaje_action'] = $result_edited;
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             } else{
-                $editoriales = $editorial->get();
-                retornar_vista(VIEW_SET_EDITORIAL, $editoriales); 
+                header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
             }
             break;
         default:
-            $editoriales = $editorial->get();
-            print_r($editoriales);
-            retornar_vista($event, $editoriales);
+        header('Location: ' . '/dwp_2023_pf_bmanuel/' . MODULO . GET_EDITORIAL . '/');
+
     }
 }
 function set_obj_editorial()

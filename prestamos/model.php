@@ -117,4 +117,34 @@ class PrestamoModel extends DBAbstractModel
             );
         }
     }
+
+
+    public function consultaPorFecha($consulta)
+    {
+        
+        $this->query = $consulta;
+        $this->get_results_from_query();
+
+        if (!$this->rows) {
+            return [
+                'mensaje' => 'No se encontraron los Prestamos',
+                'registros' => []
+            ];
+        }
+        $resultados = array_map(function ($row) {
+            return [
+                'ISBN' => $row['ISBN'],
+                'TITULO' => $row['TITULO'],
+                'ClaveUsu' => $row['ClaveUsu'],
+                'NombreCompleto' => $row['NombreCompleto'],
+                'SALIDA' => $row['SALIDA'],
+                'DEVOLUCION' => $row['DEVOLUCION']
+            ];
+        }, $this->rows);
+
+        return [
+            'mensaje' => 'Prestamos Encontrados',
+            'registros' => $resultados
+        ];
+    }
 }
