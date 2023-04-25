@@ -1,7 +1,5 @@
 /* tables */
 
-/* la base  dedatos se tien que llamar 'adb_2023_act6_Bmanuel' */
-
 CREATE TABLE `usuarios` 
 (
   `ClaveUsu`  VARCHAR(11) NOT NULL,

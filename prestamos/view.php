@@ -192,11 +192,12 @@ function retornar_vista_consultas($vistaU, $data = array(), $mensaje)
     /* el contenido de la tabla */
     $html = str_replace('{TBODY}', $tabla_body, $html);
     /* pone el nombre del modulo en la pagina */
-    $html = str_replace('{TABLA_NAME}',  'PRESTAMOS', $html);
+    $html = str_replace('{TABLA_NAME}',  'HOME ', $html);
     $html = str_replace('<!-- {consulta_tipo} -->',  $mensaje, $html);
     /* insertar estilos y escripts propios del modulo */
     $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Prestamos.js"></script>', $html);
-
+    date_default_timezone_set('America/Mexico_City');
+    
     $html = str_replace('<!--{HOY}-->', '<input class="celda_oculta"  type="date" name="fecha_dia" value="' . date("Y-m-d") . '">', $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
