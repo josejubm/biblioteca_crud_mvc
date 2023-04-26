@@ -55,7 +55,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{contenido}', get_vista_html($vista), $html);
     $html = str_replace('{TABLA_NAME}', 'INICIO', $html);
     $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Libros.js"></script>', $html);
-
+    $html = str_replace('{USER}', $_SESSION['user_logueado'], $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

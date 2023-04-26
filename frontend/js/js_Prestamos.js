@@ -114,3 +114,32 @@ function modalPrestamos(user_id, isbn, salida, user, libro) {
     form.appendChild(input3);
 }
 /* FIN MODAL */
+
+/* ORDEN ALFAVETICA METE DE LOS SELECT */
+function ordenarSelect(idSelect) {
+    // Seleccionar el select por su ID
+    var select = document.getElementById(idSelect);
+    // Crear un array vacío para las opciones
+    var options = [];
+    // Recorrer todas las opciones del select
+    for (var i = 0; i < select.options.length; i++) {
+      // Agregar la opción al array
+      options.push(select.options[i]);
+    }
+    // Ordenar alfabéticamente el array de opciones
+    options.sort(function(a, b) {
+      return a.text.localeCompare(b.text);
+    });
+    // Crear una cadena de texto con el código HTML de las opciones ordenadas
+    var html = "";
+    for (var i = 0; i < options.length; i++) {
+      html += "<option value=\"" + options[i].value + "\">" + options[i].text + "</option>";
+    }
+    // Reemplazar el contenido del select con las opciones ordenadas
+    select.innerHTML = html;
+  }
+  
+  // Llamar a la función para ordenar los selects con diferentes IDs
+  ordenarSelect("usuario");
+  ordenarSelect("libro");
+  /* FIN DEL ORDENAMIENTO */

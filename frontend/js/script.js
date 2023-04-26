@@ -1,4 +1,7 @@
 /* PAGINADO DE TABLA */
+
+let showAll = false;
+
 function showTablePage(tableId, page) {
   const table = document.getElementById(tableId);
   const tableRows = table.getElementsByTagName('tr');
@@ -6,16 +9,23 @@ function showTablePage(tableId, page) {
 
   // hide all rows
   for (let i = 1; i < tableRows.length; i++) {
-      tableRows[i].style.display = 'none';
+    tableRows[i].style.display = 'none';
   }
 
-  // show rows for current page
-  const start = (page - 1) * 8;
-  const end = start + 8;
-  for (let i = start; i < end && i < tableRows.length; i++) {
+  // show rows for current page or show all rows
+  if (showAll) {
+    for (let i = 1; i < tableRows.length; i++) {
       tableRows[i].style.display = '';
+    }
+  } else {
+    const start = (page - 1) * 8;
+    const end = start + 8;
+    for (let i = start; i < end && i < tableRows.length; i++) {
+      tableRows[i].style.display = '';
+    }
   }
 }
+
 function createPagination(tableId) {
   const table = document.getElementById(tableId);
   const tableRows = table.getElementsByTagName('tr');
@@ -29,26 +39,40 @@ function createPagination(tableId) {
   list.classList.add('pagination-list');
   pagination.appendChild(list);
 
+  // Add button to show all rows
+  const showAllButton = document.createElement('li');
+  showAllButton.classList.add('pagination-item');
+  const showAllLink = document.createElement('a');
+  showAllLink.href = '#';
+  showAllLink.innerText = 'Mostrar Todos';
+  showAllButton.appendChild(showAllLink);
+  showAllButton.addEventListener('click', () => {
+    showAll = !showAll;
+    showTablePage(tableId, 1);
+    const paginationItems = document.querySelectorAll('.pagination-item');
+    paginationItems.forEach(item => item.classList.remove('active_pagination'));
+    showAllButton.classList.add('active_pagination');
+  });
+  list.appendChild(showAllButton);
+
   for (let i = 1; i <= totalPages; i++) {
-      const pageButton = document.createElement('li');
-      pageButton.classList.add('pagination-item');
-      const pageLink = document.createElement('a');
-      pageLink.href = '#';
-      pageLink.innerText = i;
-      pageButton.appendChild(pageLink);
-      pageButton.addEventListener('click', () => showTablePage(tableId, i));
-      list.appendChild(pageButton);
-
-      pageButton.addEventListener('click', () => {
-          const paginationItems = document.querySelectorAll('.pagination-item');
-          paginationItems.forEach(item => item.classList.remove('active_pagination'));
-          pageButton.classList.add('active_pagination');
-
-          showTablePage(tableId, i);
-      });
-
+    const pageButton = document.createElement('li');
+    pageButton.classList.add('pagination-item');
+    const pageLink = document.createElement('a');
+    pageLink.href = '#';
+    pageLink.innerText = i;
+    pageButton.appendChild(pageLink);
+    pageButton.addEventListener('click', () => {
+      showAll = false;
+      const paginationItems = document.querySelectorAll('.pagination-item');
+      paginationItems.forEach(item => item.classList.remove('active_pagination'));
+      pageButton.classList.add('active_pagination');
+      showTablePage(tableId, i)
+    });
+    list.appendChild(pageButton);
   }
 }
+
 const tableId = 'table';
 showTablePage(tableId, 1);
 createPagination(tableId);
@@ -59,23 +83,23 @@ createPagination(tableId);
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function() {
+sidebarBtn.onclick = function () {
   sidebar.classList.toggle("active");
-  if(sidebar.classList.contains("active")){
-  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-}else
-  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  if (sidebar.classList.contains("active")) {
+    sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else
+    sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 }
 
 /* alert js script */
 // Evento para cerrar la alerta al hacer clic en la "X"
 var close = document.getElementsByClassName("closebtn");
 for (var i = 0; i < close.length; i++) {
-    close[i].addEventListener("click", function () {
-        var div = this.parentElement;
-        div.style.opacity = "0";
-        setTimeout(function () { div.parentNode.removeChild(div); }, 600);
-    });
+  close[i].addEventListener("click", function () {
+    var div = this.parentElement;
+    div.style.opacity = "0";
+    setTimeout(function () { div.parentNode.removeChild(div); }, 600);
+  });
 }
 /* FIN ANIMACION DEL SIDEBAR */
 
@@ -113,23 +137,23 @@ function buscarEnTabla() {
   var tblDatos = document.getElementById("table");
 
   for (let i = 1; i < tblDatos.rows.length; i++) {
-      var celdas = tblDatos.rows[i].getElementsByTagName("td");
-      var encontrado = false;
+    var celdas = tblDatos.rows[i].getElementsByTagName("td");
+    var encontrado = false;
 
-      for (let j = 0; j < celdas.length && !encontrado; j++) {
-          var valorCelda = celdas[j].innerHTML.toLowerCase();
+    for (let j = 0; j < celdas.length && !encontrado; j++) {
+      var valorCelda = celdas[j].innerHTML.toLowerCase();
 
-          if (datoBuscar.length == 0 || valorCelda.indexOf(datoBuscar) > -1) {
+      if (datoBuscar.length == 0 || valorCelda.indexOf(datoBuscar) > -1) {
 
-              encontrado = true;
-              /* break; */
-          }
+        encontrado = true;
+        /* break; */
       }
-      if (encontrado) {
-          tblDatos.rows[i].style.display = "";
-      } else {
-          tblDatos.rows[i].style.display = "none";
-      }
+    }
+    if (encontrado) {
+      tblDatos.rows[i].style.display = "";
+    } else {
+      tblDatos.rows[i].style.display = "none";
+    }
 
   }
 }

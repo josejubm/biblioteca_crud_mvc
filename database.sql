@@ -1,5 +1,13 @@
 /* tables */
-
+CREATE TABLE `users` 
+(
+  `id`  INT(5) NOT NULL AUTO_INCREMENT,
+  `user`    VARCHAR(20) NOT NULL,
+  `password`   VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE = InnoDB;
+INSERT INTO `users` (`id`, `user`, `password`) 
+              VALUES ('1', 'jose', '1234'); 
 CREATE TABLE `usuarios` 
 (
   `ClaveUsu`  VARCHAR(11) NOT NULL,

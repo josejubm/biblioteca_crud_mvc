@@ -1,10 +1,15 @@
 <?php
+session_start();
+if (!isset($_SESSION["user_logueado"])) {
+    header("Location: /dwp_2023_pf_bmanuel/index.php");
+  return;
+}
+
 require_once('constants.php');
 require_once('model.php');
 require_once('view.php');
 function handler()
 {
-    session_start();
     // redirigir a la vista VIEW_GET_AUTOR si no se especifica ninguna petición
     if (empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === MODULO) {
         header("Location: " . MODULO . VIEW_GET_EDITORIAL . "/");

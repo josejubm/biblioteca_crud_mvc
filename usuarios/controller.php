@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION["user_logueado"])) {
+    header("Location: /dwp_2023_pf_bmanuel/index.php");
+  return;
+}
+
 require_once('constants.php');
 require_once('model.php');
 require_once('view.php');
