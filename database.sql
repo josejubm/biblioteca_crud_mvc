@@ -6,8 +6,7 @@ CREATE TABLE `users`
   `password`   VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE = InnoDB;
-INSERT INTO `users` (`id`, `user`, `password`) 
-              VALUES ('1', 'jose', '1234'); 
+
 CREATE TABLE `usuarios` 
 (
   `ClaveUsu`  VARCHAR(11) NOT NULL,
@@ -38,7 +37,7 @@ CREATE TABLE `libros`
   `Titulo`      VARCHAR(50) NOT NULL,
   `editorial_Id` INT(2) NOT NULL,
   PRIMARY KEY (`ISBN`),
-  CONSTRAINT `fk_libros_editoriales1` FOREIGN KEY (`editorial_Id`) REFERENCES `adb_2023_act6_Bmanuel`.`editoriales` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_libros_editoriales1` FOREIGN KEY (`editorial_Id`) REFERENCES `editoriales` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
   )ENGINE = InnoDB;
 
 
@@ -49,8 +48,8 @@ CREATE TABLE `prestamos`
   `Devolucion` DATE NULL,
   `ClaveUsu`   VARCHAR(11) NOT NULL,
   `ISBN`       VARCHAR(17) NOT NULL,
-  CONSTRAINT `fk_prestamo_usuarios`FOREIGN KEY (`ClaveUsu`)REFERENCES `adb_2023_act6_Bmanuel`.`usuarios` (`ClaveUsu`)ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_prestamo_libros1` FOREIGN KEY (`ISBN`)    REFERENCES `adb_2023_act6_Bmanuel`.`libros`    (`ISBN`)   ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_prestamo_usuarios`FOREIGN KEY (`ClaveUsu`)REFERENCES `usuarios` (`ClaveUsu`)ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_prestamo_libros1` FOREIGN KEY (`ISBN`)    REFERENCES `libros`    (`ISBN`)   ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
 
 
@@ -71,14 +70,15 @@ CREATE TABLE `libros_autores`
   `ISBN` VARCHAR(17) NOT NULL,
   `autor_Id` INT(2)  NOT NULL,
   UNIQUE KEY(`ISBN`,`autor_Id`),
-  CONSTRAINT `fk_libros_autor_libros1` FOREIGN KEY (`ISBN`) REFERENCES `adb_2023_act6_Bmanuel`.`libros` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_libros_autor_autores1`  FOREIGN KEY (`autor_Id`)REFERENCES `adb_2023_act6_Bmanuel`.`autores` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_libros_autor_libros1` FOREIGN KEY (`ISBN`) REFERENCES `libros` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_libros_autor_autores1`  FOREIGN KEY (`autor_Id`)REFERENCES `autores` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
 
 
 /* inserts */
 
-
+INSERT INTO `users` (`id`, `user`, `password`) 
+              VALUES ('1', 'jose', '1234'); 
 
 INSERT INTO `usuarios` (`ClaveUsu`,     `Nombre`,   `Paterno`,  `Materno`,   `Colonia`,                 `Calle`,                        `Numero`,  `Telefono`   ) VALUES
                        ('1889162',      'Eduardo',   'Sureda',   'Escalona',  'Juárez',                  '11 De Mayo',                   '#1261',  '7569057023' ),
