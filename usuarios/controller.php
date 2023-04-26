@@ -32,8 +32,6 @@ function handler()
 
     $usuario = set_obj_usuario();
 
-    session_start();
-
     switch ($event) {
         case SET_USUARIO:
             if (!empty($_POST)) {

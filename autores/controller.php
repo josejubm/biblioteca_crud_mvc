@@ -31,8 +31,6 @@ function handler()
 
     $autor = set_obj_autor();
 
-    session_start();
-
     switch ($event) {
         case SET_AUTOR:
             if (!empty($_POST) && $_POST['nombre'] != '') {

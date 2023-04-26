@@ -33,7 +33,7 @@ function handler()
             $event = $peticion;
         }
     }
-    session_start();
+
     $prestamo = set_obj_prestamo();
 
     switch ($event) {

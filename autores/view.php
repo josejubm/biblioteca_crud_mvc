@@ -109,6 +109,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{total_autor}', $contador_lista, $html);
     $html = str_replace('{TABLA_NAME}', 'AUTOR', $html);
     $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Autores.js"></script>', $html);
+    $html = str_replace('{USER}', $_SESSION['user_logueado'], $html);
 
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);

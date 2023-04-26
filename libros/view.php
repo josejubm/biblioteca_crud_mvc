@@ -158,6 +158,7 @@ function retornar_vista($vista, $data = array(), $data_autor = array(), $data_ed
     $html = str_replace('{options_editorial}',  $options_editorial, $html);
     $html = str_replace('{TABLA_NAME}',  'LIBROS', $html);
     $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Libros.js"></script>', $html);
+    $html = str_replace('{USER}', $_SESSION['user_logueado'], $html);
 
 
 

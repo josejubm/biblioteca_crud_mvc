@@ -113,6 +113,7 @@ function retornar_vista($vista, $data = array())
     $html = str_replace('{TBODY}', $tabla_body, $html);
     $html = str_replace('{ALERT}', $alert, $html);
     $html = str_replace('{TABLA_NAME}', 'USUARIOS', $html);
+    $html = str_replace('{USER}', $_SESSION['user_logueado'], $html);
     /* insertar estilos y escripts propios del modulo */
     $html = str_replace('<!--MODULO_JS-->',  '<script src="../../frontend/js/js_Usuarios.js"></script>', $html);
 
